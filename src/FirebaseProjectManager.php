@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kreait\Laravel\Firebase;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Foundation\Application;
 use Kreait\Firebase\Exception\InvalidArgumentException;
@@ -32,6 +33,7 @@ class FirebaseProjectManager
         if (!isset($this->projects[$name])) {
             $this->projects[$name] = $this->configure($name);
         }
+        Log::info(['message' => 'From FirebaseProjectManager', 'projects' => $this->projects, 'name' => $name]);
 
         return $this->projects[$name];
     }

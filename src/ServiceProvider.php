@@ -43,31 +43,31 @@ final class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     private function registerComponents(): void
     {
-        $this->app->bind(Firebase\Contract\Auth::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->auth());
+        $this->app->singleton(Firebase\Contract\Auth::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->auth());
         $this->app->alias(Firebase\Contract\Auth::class, 'firebase.auth');
 
-        $this->app->bind(Firebase\Contract\Database::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->database());
+        $this->app->singleton(Firebase\Contract\Database::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->database());
         $this->app->alias(Firebase\Contract\Database::class, 'firebase.database');
 
-        $this->app->bind(Firebase\Contract\DynamicLinks::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->dynamicLinks());
+        $this->app->singleton(Firebase\Contract\DynamicLinks::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->dynamicLinks());
         $this->app->alias(Firebase\Contract\DynamicLinks::class, 'firebase.dynamic_links');
 
-        $this->app->bind(Firebase\Contract\Firestore::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->firestore());
+        $this->app->singleton(Firebase\Contract\Firestore::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->firestore());
         $this->app->alias(Firebase\Contract\Firestore::class, 'firebase.firestore');
 
-        $this->app->bind(Firebase\Contract\Messaging::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->messaging());
+        $this->app->singleton(Firebase\Contract\Messaging::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->messaging());
         $this->app->alias(Firebase\Contract\Messaging::class, 'firebase.messaging');
 
-        $this->app->bind(Firebase\Contract\RemoteConfig::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->remoteConfig());
+        $this->app->singleton(Firebase\Contract\RemoteConfig::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->remoteConfig());
         $this->app->alias(Firebase\Contract\RemoteConfig::class, 'firebase.remote_config');
 
-        $this->app->bind(Firebase\Contract\Storage::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->storage());
+        $this->app->singleton(Firebase\Contract\Storage::class, static fn (Container $app) => $app->make(FirebaseProjectManager::class)->project()->storage());
         $this->app->alias(Firebase\Contract\Storage::class, 'firebase.storage');
     }
 
     private function registerManager(): void
     {
-        $this->app->bind(FirebaseProjectManager::class, static fn (Container $app) => new FirebaseProjectManager($app));
+        $this->app->singleton(FirebaseProjectManager::class, static fn (Container $app) => new FirebaseProjectManager($app));
         $this->app->alias(FirebaseProjectManager::class, 'firebase.manager');
     }
 }
